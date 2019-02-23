@@ -1,22 +1,22 @@
 CSV-to-GPX-Converter for geocaching.com
 ======
 
-This python script converts coordinates from a CSV to a GPX file. Using the two provided GSAK scripts, you can then easily upload your coordinates to geocaching.com. The provided scripts automatically update the coordinates for each geocache.
+This Go application converts coordinates from a CSV to a GPX file. The GPX file follows the standard format so that it can be imported in GSAK. Using the two provided GSAK scripts, you can upload your coordinates to geocaching.com. The provided scripts automatically update the coordinates for each geocache.
 
 ## Input
 You have to provide the GC number and the coordinates for each geocache within the CSV file. Thats the minimal requirement for a successful upload via the geocaching.com API.
 
-The python script is configured to work with this pattern:
+The application is configured to work with this pattern:
 
 ```
 GC-Code;LAT;LON
 GC10020;N33° 41.876;W117° 57.297
 ```
 
-If you know some Python you can easily adjust it to your needs. You can also contact me if you need help.
+If you know some Go, you can easily adjust it to your needs. You can also contact me if you need help.
 
 ## Output
-The python script creates a GPX file with this format
+The application creates a GPX file with this format
 
 ```
 <gpx>
@@ -24,10 +24,18 @@ The python script creates a GPX file with this format
 </gpx>
 ```
 
-## Configuration
-The config.txt file contains the configuration parameters for the script. The `input` parameter specifies the relative path the input file having the raw input. The gpx output file will be saved in the same location with the same filename.
+## Build
+Build the application with
+```
+go build
+```
+This creates an executable called csv2gpx.exe in the working directory.
 
-The parameter `delimiter` lets you define the data delimiter. In the above example, if was a semicolon.
+## Usage 
+Run the application with
+```
+csv2gpx.exe data/input.csv data/output.gpx
+```
 
 ## Setup GSAK
 
@@ -46,7 +54,7 @@ In GSAK, go to `Macro -> Execute -> Install` or press `CTRL+M -> Install`. Selec
 
 
 ## Docker build
-You can also use the provided Dockerfile to build and run the python script.
+You can also use the provided Dockerfile to build and run the application.
 
 ```
 docker build --rm -t gpx-converter .
