@@ -1,6 +1,7 @@
 .vscode
-src/__pycache__/
 
 /data/*
 !/data/example_input.csv
 !/data/example_input.gpx
+
+*.exe
