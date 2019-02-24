@@ -11,6 +11,11 @@ var (
 
 func main() {
 	kingpin.Version("1.0.0")
+	kingpin.UsageTemplate(kingpin.CompactUsageTemplate)
+
+	kingpin.CommandLine.HelpFlag.Short('h')
+	kingpin.CommandLine.VersionFlag.Short('v')
+
 	kingpin.Parse()
 
 	Convert(*inputPath, *outputPath)
