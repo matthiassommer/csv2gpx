@@ -26,6 +26,3 @@ ENV INPUT ""
 ENV OUTPUT ""
 
 CMD ./app $INPUT $OUTPUT
-
-# TODO mount volume and copy exe and/or output.gpx there
-# for example docker cp 561a6c222c6e:/root/app ./app
