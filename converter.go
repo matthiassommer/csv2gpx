@@ -44,7 +44,7 @@ func Convert(inFile string, outFile string) {
 			log.Fatal(err)
 		}
 
-		rowsTotal += 1
+		rowsTotal++
 
 		gccode := parseGcCode(row[0])
 
@@ -58,12 +58,12 @@ func Convert(inFile string, outFile string) {
 		convertedRow := "<wpt lat=" + roundedLat + " lon=" + roundedLon + "><name>" + gccode + "</name></wpt>\n"
 		output += convertedRow
 
-		rowsConverted += 1
+		rowsConverted++
 	}
 
 	output += "</gpx>"
 
-	fmt.Println("Total rows:", rowsTotal, "Converted rows:", rowsConverted)
+	fmt.Println("Total rows:", rowsTotal, "\nConverted rows:", rowsConverted)
 
 	writeGpx(outFile, output)
 }
