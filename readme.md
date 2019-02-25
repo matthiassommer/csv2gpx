@@ -62,7 +62,7 @@ docker run -e INPUT=data/example_input.csv -e OUTPUT=data/example_input.gpx csv2
 
 # copy gpx to host (replace container id with the real one)
 docker ps -a
-docker cp <containerid>:/root/data/example_input.gpx ./output.gpx
+docker cp <containerid>:/data/example_input.gpx ./output.gpx
 ```
 
 

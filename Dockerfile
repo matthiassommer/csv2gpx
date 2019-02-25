@@ -19,7 +19,6 @@ RUN GOOS=linux GOARCH=amd64 go build -o app .
 # Second stage
 FROM alpine
 
-WORKDIR /root/
 COPY --from=builder /go/src/github.com/matthiassommer/csv2gpx/ .
 
 ENV INPUT ""
