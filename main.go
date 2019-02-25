@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -18,5 +20,6 @@ func main() {
 
 	kingpin.Parse()
 
+	fmt.Println("CSV:", *inputPath, "GPX:", *outputPath)
 	Convert(*inputPath, *outputPath)
 }
