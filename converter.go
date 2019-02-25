@@ -32,6 +32,9 @@ func Convert(inFile string, outFile string) {
 
 	output := "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<gpx xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" creator=\"Groundspeak Pocket Query\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd\" xmlns=\"http://www.topografix.com/GPX/1/0\">\n"
 
+	rowsConverted := 0
+	rowsTotal := 0
+
 	for {
 		row, err := r.Read()
 		if err == io.EOF {
@@ -40,6 +43,8 @@ func Convert(inFile string, outFile string) {
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		rowsTotal += 1
 
 		gccode := parseGcCode(row[0])
 
@@ -52,12 +57,15 @@ func Convert(inFile string, outFile string) {
 		// build row and append to gpx, e.g. <wpt lat=50.565150 lon=-113.716433><name>GC80AD</name></wpt>
 		convertedRow := "<wpt lat=" + roundedLat + " lon=" + roundedLon + "><name>" + gccode + "</name></wpt>\n"
 		output += convertedRow
+
+		rowsConverted += 1
 	}
 
 	output += "</gpx>"
 
-	writeGpx(outFile, output)
+	fmt.Println("Total rows:", rowsTotal, "Converted rows:", rowsConverted)
 
+	writeGpx(outFile, output)
 }
 
 func parseGcCode(data string) string {
@@ -103,4 +111,6 @@ func writeGpx(target string, data string) {
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Println("GPX written to", target)
 }
