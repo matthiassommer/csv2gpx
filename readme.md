@@ -57,8 +57,8 @@ In GSAK, go to `Macro -> Execute -> Install` or press `CTRL+M -> Install`. Selec
 You can also use the provided Dockerfile to build and run the application.
 
 ```
-docker build --rm -t gpx-converter .
-docker run gpx-converter
+docker build --rm -t csv2gpx .
+docker run -e INPUT=data/example_input.csv -e OUTPUT=data/example_input.gpx csv2gpx
 ```
 
 
