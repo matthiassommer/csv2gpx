@@ -10,8 +10,8 @@ RUN go get gopkg.in/alecthomas/kingpin.v2
 
 # copy the code and data
 COPY data/example_input.csv ./data/
-COPY converter.go .
 COPY main.go .
+COPY converter.go .
 
 # build the app
 RUN GOOS=linux GOARCH=amd64 go build -o app .
