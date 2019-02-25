@@ -1,8 +1,31 @@
-FROM golang:1:11
+FROM golang:1.11-alpine AS builder
+
+LABEL maintainer="Matthias Sommer, matthiassommer@posteo.de"
+
+WORKDIR /go/src/github.com/matthiassommer/csv2gpx
+
+# install dependencies
+RUN apk add --update git
 RUN go get gopkg.in/alecthomas/kingpin.v2
-COPY data /go/src/csv2gpx/data
-COPY converter.go /go/src/csv2gpx
-COPY main.go /go/src/csv2gpx
-WORKDIR /go/src/csv2gpx
-RUN go build
-RUN csv2gpx.exe data/example_input.csv data/example_output.gpx
+
+# copy the code and data
+COPY data/example_input.csv ./data/
+COPY converter.go .
+COPY main.go .
+
+# build the app
+RUN GOOS=linux GOARCH=amd64 go build -o app .
+
+# Second stage
+FROM alpine
+
+WORKDIR /root/
+COPY --from=builder /go/src/github.com/matthiassommer/csv2gpx/ .
+
+ENV INPUT ""
+ENV OUTPUT ""
+
+CMD ./app $INPUT $OUTPUT
+
+# TODO mount volume and copy exe and/or output.gpx there
+# for example docker cp 561a6c222c6e:/root/app ./app
