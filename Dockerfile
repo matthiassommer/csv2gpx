@@ -14,7 +14,7 @@ COPY main.go .
 COPY converter.go .
 
 # build the app
-RUN GOOS=linux GOARCH=amd64 go build -o app .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o app .
 
 # Second stage
 FROM alpine
