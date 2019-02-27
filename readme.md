@@ -58,7 +58,7 @@ You can also use the provided Dockerfile to build and run the application.
 
 ```
 docker build --rm -t csv2gpx .
-docker run -e INPUT=data/example_input.csv -e OUTPUT=data/example_input.gpx csv2gpx
+docker run -e INPUT=data/example_input.csv -e OUTPUT=data/example_input.gpx --name csv2gpx csv2gpx
 
 # copy gpx to host (replace container id with the real one)
 docker ps -a
