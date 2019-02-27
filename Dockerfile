@@ -24,4 +24,4 @@ COPY --from=builder /go/src/github.com/matthiassommer/csv2gpx/ .
 ENV INPUT ""
 ENV OUTPUT ""
 
-CMD ./app $INPUT $OUTPUT
+ENTRYPOINT ./app $INPUT $OUTPUT
